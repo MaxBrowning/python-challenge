@@ -36,11 +36,9 @@ with open(poll_csv) as csvfile:
         if row[2] == "O'Tooley":
             votes_otooley += 1
 
-        # append candidates list with unique candidates (commented out as unnecessary in final script, but necessary to confirm complete list of candidates)
+        # append list of candidates with unique candidates
         if row[2] not in candidates:
             candidates.append(row[2])
-
-print(candidates)
 
 # find the total number of votes (values) in the set
 total_votes = len(voters)
@@ -63,3 +61,26 @@ print(f"O'Tooley: {otooley_percent}% ({votes_otooley})")
 print("--------------------------")
 print("Winner: Khan")
 print("--------------------------")
+
+# export text file with results
+# identify export path
+export_path = os.path.join("Analysis", "Election_Results.txt")
+
+# open the file in write mode
+report = open(export_path, 'w')
+
+# add text to .txt document
+report.write("Election Results" + "\n")
+report.write("--------------------------" + "\n")
+report.write(f"Total Votes: {total_votes}" + "\n")
+report.write("--------------------------" + "\n")
+report.write(f"Khan: {khan_percent}% ({votes_khan})" + "\n")
+report.write(f"Correy: {correy_percent}% ({votes_correy})" + "\n")
+report.write(f"Li: {li_percent}% ({votes_li})" + "\n")
+report.write(f"O'Tooley: {otooley_percent}% ({votes_otooley})" + "\n")
+report.write("--------------------------" + "\n")
+report.write("Winner: Khan" + "\n")
+report.write("--------------------------")
+
+# close file
+report.close
