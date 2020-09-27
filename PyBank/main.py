@@ -38,13 +38,40 @@ for i in range(1,len(profit_losses)):
 # find average revenue change
 tot_rev_change = sum(revenue_change)
 num_rev_change = len(revenue_change)
-avg_rev_change = tot_rev_change / num_rev_change
+avg_rev_change = round((tot_rev_change / num_rev_change),2)
 
+# identify max increase and decrease in profits
 max_increase = max(revenue_change)
 max_decrease = min(revenue_change)
 
-print(total_months)
-print(total_profit)
-print(avg_rev_change)
-print(max_increase)
-print(max_decrease)
+# identify months with max increase and decrease in profits
+max_increase_date = date[revenue_change.index(max(revenue_change))]
+max_decrease_date = date[revenue_change.index(min(revenue_change))]
+
+# print everything to display analysis
+print("Financial Analysis")
+print("------------------")
+print("Total Months: " + str(total_months))
+print("Total: $" + str(total_profit))
+print("Average Change: $" + str(avg_rev_change))
+print("Greatest Increase in Profits: " + str(max_increase_date) + " $" + str(max_increase))
+print("Greatest Decrease in Profits: " + str(max_decrease_date) + " $" + str(max_decrease))
+
+# export text file with results
+# identify export path
+export_path = os.path.join("Analysis", "Financial_Analysis.txt")
+
+# open the file in write mode
+report = open(export_path, 'w')
+
+# add text to .txt document
+report.write("Financial Analysis" + "\n")
+report.write("------------------" + "\n")
+report.write("Total Months: " + str(total_months) + "\n")
+report.write("Total: $" + str(total_profit) + "\n")
+report.write("Average Change: $" + str(avg_rev_change) + "\n")
+report.write("Greatest Increase in Profits: " + str(max_increase_date) + " $" + str(max_increase) + "\n")
+report.write("Greatest Decrease in Profits: " + str(max_decrease_date) + " $" + str(max_decrease))
+
+# close file
+report.close
