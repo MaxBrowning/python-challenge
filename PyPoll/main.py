@@ -38,27 +38,32 @@ total_votes = len(voters)
 vote_percents = []
 for value in vote_tallies.values():
     vote_percents.append(value/total_votes*100)
+vote_percents = [round(percent, 2) for percent in vote_percents]
 
 # make list of vote totals
 vote_totals = []
 for value in vote_tallies.values():
     vote_totals.append(value)
 
+# compile election results data for each candidate into a list
+election_results = []
 for _ in range(len(candidates)):
-    print(f"{candidates[_]}: {vote_percents[_]} ({vote_totals[_]})")
+    election_results.append(f"{candidates[_]}: {vote_percents[_]} ({vote_totals[_]})")
+
+# identify the winner
+max_votes = max(vote_tallies.values())
+winner = [k for k, v in vote_tallies.items() if v == max_votes]
 
 # save election results as output data
 output_data = "Election Results\n"
 output_data += "--------------------------\n"
 output_data += f"Total Votes: {total_votes}\n"
 output_data += "--------------------------\n"
-#output_data += f"Khan: {khan_percent}% ({votes_khan})\n"
-#output_data += f"Correy: {correy_percent}% ({votes_correy})\n"
-#output_data += f"Li: {li_percent}% ({votes_li})\n"
-#output_data += f"O'Tooley: {otooley_percent}% ({votes_otooley})\n"
+for elem in election_results:
+    output_data += f"{elem}\n"
 output_data += "--------------------------\n"
-output_data += "Winner: Khan\n"
-output_data += "--------------------------\n"
+output_data += f"Winner: {winner}\n"
+output_data += "--------------------------"
 
 #print output data to terminal
 print(f"{output_data}")
