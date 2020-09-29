@@ -48,14 +48,17 @@ max_decrease = min(revenue_change)
 max_increase_date = date[revenue_change.index(max(revenue_change))]
 max_decrease_date = date[revenue_change.index(min(revenue_change))]
 
-# print everything to display analysis
-print("Financial Analysis")
-print("------------------")
-print("Total Months: " + str(total_months))
-print("Total: $" + str(total_profit))
-print("Average Change: $" + str(avg_rev_change))
-print("Greatest Increase in Profits: " + str(max_increase_date) + " $" + str(max_increase))
-print("Greatest Decrease in Profits: " + str(max_decrease_date) + " $" + str(max_decrease))
+# save everything to display analysis as output data
+output_data = "Financial Analysis\n"
+output_data += "------------------\n"
+output_data += f"Total Months: {total_months}\n"
+output_data += f"Total: ${total_profit}\n"
+output_data += f"Average Change: ${avg_rev_change}\n"
+output_data += f"Greatest Increase in Profits: {max_increase_date} ${max_increase}\n"
+output_data += f"Greatest Decrease in Profits: {max_decrease_date} ${max_decrease}"
+
+# print output data to terminal
+print(output_data)
 
 # export text file with results
 # identify export path
@@ -65,13 +68,7 @@ export_path = os.path.join("Analysis", "Financial_Analysis.txt")
 report = open(export_path, 'w')
 
 # add text to .txt document
-report.write("Financial Analysis" + "\n")
-report.write("------------------" + "\n")
-report.write("Total Months: " + str(total_months) + "\n")
-report.write("Total: $" + str(total_profit) + "\n")
-report.write("Average Change: $" + str(avg_rev_change) + "\n")
-report.write("Greatest Increase in Profits: " + str(max_increase_date) + " $" + str(max_increase) + "\n")
-report.write("Greatest Decrease in Profits: " + str(max_decrease_date) + " $" + str(max_decrease))
+report.write(output_data)
 
 # close file
 report.close
